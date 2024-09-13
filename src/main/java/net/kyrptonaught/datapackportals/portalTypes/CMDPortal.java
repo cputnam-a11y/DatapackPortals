@@ -1,11 +1,15 @@
 package net.kyrptonaught.datapackportals.portalTypes;
 
+import com.mojang.serialization.Codec;
 import net.kyrptonaught.customportalapi.util.PortalLink;
 import net.kyrptonaught.customportalapi.util.SHOULDTP;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
+import java.util.Objects;
+
 public class CMDPortal extends DefaultPortal {
+    public static final Codec<CMDPortal> CODEC =
     public String command;
 
     @Override
@@ -15,7 +19,7 @@ public class CMDPortal extends DefaultPortal {
 
         link.getBeforeTPEvent().register(entity -> {
             if (entity instanceof ServerPlayerEntity player) {
-                player.getServer().getCommandManager().executeWithPrefix(player.getCommandSource(), command);
+                Objects.requireNonNull(player.getServer()).getCommandManager().executeWithPrefix(player.getCommandSource(), command);
             }
             return SHOULDTP.CANCEL_TP;
         });

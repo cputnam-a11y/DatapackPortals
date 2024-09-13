@@ -17,17 +17,17 @@ public class DefaultPortal implements PortalData {
     public PortalLink toLink(Identifier identifier) {
         PortalLink link = new PortalLink();
         CustomPortalBuilder builder = CustomPortalBuilder.beginPortal(link)
-                .frameBlock(new Identifier(block))
-                .destDimID(new Identifier(dim))
+                .frameBlock(Identifier.of(block))
+                .destDimID(Identifier.of(dim))
                 .tintColor(r, g, b);
 
         if (ignitionType.equalsIgnoreCase("fluid"))
-            builder.lightWithFluid(Registries.FLUID.get(new Identifier(ignitionSource)));
+            builder.lightWithFluid(Registries.FLUID.get(Identifier.of(ignitionSource)));
         else if (ignitionType.equalsIgnoreCase("item"))
-            builder.lightWithItem(Registries.ITEM.get(new Identifier(ignitionSource)));
+            builder.lightWithItem(Registries.ITEM.get(Identifier.of(ignitionSource)));
 
         if (returnDim != null)
-            builder.returnDim(new Identifier(returnDim), false);
+            builder.returnDim(Identifier.of(returnDim), false);
 
         if (portalType != null && portalType.equalsIgnoreCase("flat"))
             builder.flatPortal();

@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 import java.util.Map;
 
 public class PortalLinkDataPackLoader implements SimpleSynchronousResourceReloadListener {
-    public static final Identifier ID = new Identifier(DatapackPortalsMod.MOD_ID, "portal_json");
+    public static final Identifier ID = Identifier.of(DatapackPortalsMod.MOD_ID, "portal_json");
     private static final Gson GSON = (new GsonBuilder()).create();
 
     @Override
@@ -24,6 +24,7 @@ public class PortalLinkDataPackLoader implements SimpleSynchronousResourceReload
         return ID;
     }
 
+    @SuppressWarnings({"unchecked", "CallToPrintStackTrace"})
     @Override
     public void reload(ResourceManager manager) {
         for (PortalTypeRecord portalType : DatapackPortalsMod.PortalTypeRegisters) {
